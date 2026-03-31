@@ -1,0 +1,49 @@
+{
+  "name": "layout-adaptor-vue",
+  "version": "1.0.0",
+  "description": "Vue 3 integration for layout-adaptor — composable hooks and components",
+  "author": {
+    "name": "SK-ERIC",
+    "email": "graceful.sk0@gmail.com",
+    "url": "https://github.com/SK-ERIC"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/SK-ERIC/layout-adaptor",
+  "repository": {
+    "url": "https://github.com/SK-ERIC/layout-adaptor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SK-ERIC/layout-adaptor/issues"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "stub": "unbuild --stub",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "vue": "^3.3.0",
+    "layout-adaptor": "workspace:*"
+  },
+  "devDependencies": {
+    "layout-adaptor": "workspace:*",
+    "typescript": "^5.3.3",
+    "unbuild": "^2.0.0",
+    "vue": "^3.5.0"
+  }
+}
