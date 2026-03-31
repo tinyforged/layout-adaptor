@@ -1,7 +1,8 @@
 {
-  "name": "layout-adaptor",
+  "name": "layout-adaptor-monorepo",
+  "private": true,
   "version": "0.0.3",
-  "description": "screen container",
+  "description": "Responsive layout adaptor monorepo",
   "author": {
     "name": "SK-ERIC",
     "email": "graceful.sk0@gmail.com",
@@ -15,25 +16,11 @@
   "bugs": {
     "url": "https://github.com/SK-ERIC/layout-adaptor/issues"
   },
-  "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs",
-      "types": "./dist/index.d.ts"
-    }
-  },
-  "main": "dist/index.cjs",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
-  },
-  "files": [
-    "dist"
-  ],
   "scripts": {
-    "build": "pnpm typecheck && unbuild && pnpm build-pkg",
-    "build-pkg": "pnpm -r --filter='./packages/*' run build",
+    "dev": "pnpm -C playground dev",
+    "build": "pnpm -r --filter='./packages/*' run build",
+    "build:playground": "pnpm -r --filter='./packages/*' run build && pnpm -C playground build",
+    "preview": "pnpm -C playground preview",
     "stub": "pnpm -r run stub",
     "lint": "eslint . --fix",
     "format": "bt prettier-write",
@@ -41,8 +28,8 @@
     "cleanup": "bt cleanup",
     "ncu": "bt ncu",
     "publish-pkg": "pnpm -r publish --access public",
-    "typecheck": "tsc --noEmit",
-    "release": "bt release && pnpm build &&  pnpm publish-pkg"
+    "typecheck": "pnpm -r run typecheck",
+    "release": "bt release && pnpm build && pnpm publish-pkg"
   },
   "devDependencies": {
     "@types/node": "^20.10.4",
