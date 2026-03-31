@@ -1,0 +1,43 @@
+{
+  "name": "layout-adaptor",
+  "version": "1.0.0",
+  "description": "Framework-agnostic responsive layout adaptor for scaling containers to fit design dimensions",
+  "author": {
+    "name": "SK-ERIC",
+    "email": "graceful.sk0@gmail.com",
+    "url": "https://github.com/SK-ERIC"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/SK-ERIC/layout-adaptor",
+  "repository": {
+    "url": "https://github.com/SK-ERIC/layout-adaptor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SK-ERIC/layout-adaptor/issues"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "stub": "unbuild --stub",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "unbuild": "^2.0.0"
+  }
+}
