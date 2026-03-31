@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "ESNext",
+    "target": "ESNext",
+    "lib": ["DOM", "ESNext"],
+    "strict": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "noUnusedLocals": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "layout-adaptor": ["../packages/core/src"],
+      "layout-adaptor-vue": ["../packages/vue/src"]
+    }
+  },
+  "include": ["src"]
+}
