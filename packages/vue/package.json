@@ -40,10 +40,9 @@
     "vue": "^3.3.0"
   },
   "dependencies": {
-    "@tinyforged/layout-adaptor": "^1.0.0"
+    "@tinyforged/layout-adaptor": "workspace:*"
   },
   "devDependencies": {
-    "@tinyforged/layout-adaptor": "workspace:*",
     "typescript": "^5.3.3",
     "unbuild": "^2.0.0",
     "vue": "^3.5.0"
