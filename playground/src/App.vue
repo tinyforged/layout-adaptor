@@ -140,7 +140,7 @@ const goBack = () => {
     </main>
 
     <footer class="footer">
-      <a href="https://github.com/SK-ERIC/layout-adaptor" target="_blank"
+      <a href="https://github.com/tinyforged/layout-adaptor" target="_blank"
         >GitHub</a
       >
       <span>·</span>

@@ -9,12 +9,12 @@
     "url": "https://github.com/SK-ERIC"
   },
   "license": "MIT",
-  "homepage": "https://github.com/SK-ERIC/layout-adaptor",
+  "homepage": "https://github.com/tinyforged/layout-adaptor",
   "repository": {
-    "url": "https://github.com/SK-ERIC/layout-adaptor.git"
+    "url": "https://github.com/tinyforged/layout-adaptor.git"
   },
   "bugs": {
-    "url": "https://github.com/SK-ERIC/layout-adaptor/issues"
+    "url": "https://github.com/tinyforged/layout-adaptor/issues"
   },
   "scripts": {
     "dev": "pnpm -C playground dev",
