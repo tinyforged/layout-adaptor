@@ -6,10 +6,10 @@
 
 ## Packages
 
-| Package                                            | Version | Description        |
-| -------------------------------------------------- | ------- | ------------------ |
-| [`@tinyforged/layout-adaptor`](./packages/core)    | 1.0.0   | 框架无关的核心实现 |
-| [`@tinyforged/layout-adaptor-vue`](./packages/vue) | 1.0.0   | Vue 3 绑定         |
+| Package                                            | Version                                                                                                                               | Description        |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| [`@tinyforged/layout-adaptor`](./packages/core)    | ![npm](https://img.shields.io/npm/v/@tinyforged/layout-adaptor?style=flat-square)                                                     | 框架无关的核心实现 |
+| [`@tinyforged/layout-adaptor-vue`](./packages/vue) | ![npm](https://img.shields.io/npm/v/@tinyforged/layout-adaptor-vue?style=flat-square&color=42b883) | Vue 3 绑定         |
 
 ## Features
 
