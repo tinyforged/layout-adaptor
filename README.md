@@ -6,10 +6,10 @@
 
 ## Packages
 
-| Package                                | Version | Description        |
-| -------------------------------------- | ------- | ------------------ |
-| [`layout-adaptor`](./packages/core)    | 1.0.0   | 框架无关的核心实现 |
-| [`layout-adaptor-vue`](./packages/vue) | 1.0.0   | Vue 3 绑定         |
+| Package                                            | Version | Description        |
+| -------------------------------------------------- | ------- | ------------------ |
+| [`@tinyforged/layout-adaptor`](./packages/core)    | 1.0.0   | 框架无关的核心实现 |
+| [`@tinyforged/layout-adaptor-vue`](./packages/vue) | 1.0.0   | Vue 3 绑定         |
 
 ## Features
 
@@ -27,10 +27,10 @@
 
 ```bash
 # 核心包
-pnpm add layout-adaptor
+pnpm add @tinyforged/layout-adaptor
 
 # Vue 3 绑定
-pnpm add layout-adaptor-vue
+pnpm add @tinyforged/layout-adaptor-vue
 ```
 
 ## Usage
@@ -38,7 +38,7 @@ pnpm add layout-adaptor-vue
 ### Core
 
 ```typescript
-import { Adaptor } from "layout-adaptor";
+import { Adaptor } from "@tinyforged/layout-adaptor";
 
 const adaptor = new Adaptor({
   element: "#app",
@@ -55,7 +55,7 @@ adaptor.activate();
 
 ```vue
 <script setup>
-import { useLayoutAdaptor } from "layout-adaptor-vue";
+import { useLayoutAdaptor } from "@tinyforged/layout-adaptor-vue";
 
 const { scale, rectify } = useLayoutAdaptor({
   designWidth: 1920,
@@ -105,4 +105,4 @@ pnpm typecheck
 
 ## License
 
-MIT © [SK-ERIC](https://github.com/SK-ERIC)
+MIT © [tinyforged](https://github.com/tinyforged)
