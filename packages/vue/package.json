@@ -37,8 +37,10 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "vue": "^3.3.0",
-    "@tinyforged/layout-adaptor": "workspace:*"
+    "vue": "^3.3.0"
+  },
+  "dependencies": {
+    "@tinyforged/layout-adaptor": "^1.0.0"
   },
   "devDependencies": {
     "@tinyforged/layout-adaptor": "workspace:*",

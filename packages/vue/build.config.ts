@@ -6,7 +6,6 @@ export default defineBuildConfig({
   declaration: true,
   rollup: {
     emitCJS: true,
-    inlineDependencies: true,
     esbuild: {
       minify: true,
     },
@@ -14,5 +13,5 @@ export default defineBuildConfig({
       vue: "vue",
     },
   },
-  externals: ["vue"],
+  externals: ["vue", "@tinyforged/layout-adaptor"],
 });
