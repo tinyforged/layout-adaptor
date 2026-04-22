@@ -27,11 +27,11 @@ jobs:
 
       - run: pnpm -r build
 
-      - run: pnpm --filter layout-adaptor publish --no-git-checks
+      - run: pnpm --filter @tinyforged/layout-adaptor publish --no-git-checks --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
-      - run: pnpm --filter layout-adaptor-vue publish --no-git-checks
+      - run: pnpm --filter @tinyforged/layout-adaptor-vue publish --no-git-checks --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
