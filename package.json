@@ -18,8 +18,8 @@
   },
   "scripts": {
     "dev": "pnpm -C playground dev",
-    "build": "pnpm -r --filter='./packages/*' run build",
-    "build:playground": "pnpm -r --filter='./packages/*' run build && pnpm -C playground build",
+    "build": "pnpm --filter @tinyforged/layout-adaptor --filter @tinyforged/layout-adaptor-vue run build",
+    "build:playground": "pnpm build && pnpm -C playground build",
     "preview": "pnpm -C playground preview",
     "stub": "pnpm -r run stub",
     "lint": "eslint . --fix",

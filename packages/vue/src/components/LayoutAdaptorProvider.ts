@@ -21,7 +21,7 @@ import {
   type DebugOverlayOptions,
   type LayoutAdaptorEventType,
   type LayoutAdaptorEventListener,
-} from "layout-adaptor";
+} from "@tinyforged/layout-adaptor";
 
 export const LAYOUT_ADAPTOR_KEY = Symbol("layout-adaptor");
 

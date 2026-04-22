@@ -7,7 +7,7 @@ import {
   type AdaptMode,
   type Direction,
   type BreakpointConfig,
-} from "layout-adaptor";
+} from "@tinyforged/layout-adaptor";
 
 export interface UseLayoutAdaptorReturn {
   scale: Ref<number>;

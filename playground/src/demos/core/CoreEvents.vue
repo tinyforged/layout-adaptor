@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LayoutAdaptor, type LayoutAdaptorEventType } from "layout-adaptor";
+import { LayoutAdaptor, type LayoutAdaptorEventType } from "@tinyforged/layout-adaptor";
 import { onMounted, onUnmounted, ref } from "vue";
 
 interface LogEntry {

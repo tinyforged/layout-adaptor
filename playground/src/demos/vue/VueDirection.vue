@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LayoutAdaptor, type BreakpointConfig } from "layout-adaptor";
+import { LayoutAdaptor, type BreakpointConfig } from "@tinyforged/layout-adaptor";
 import { onMounted, onUnmounted, ref } from "vue";
 
 const scale = ref(1);

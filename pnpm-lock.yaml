@@ -41,7 +41,7 @@ importers:
 
   packages/vue:
     devDependencies:
-      layout-adaptor:
+      '@tinyforged/layout-adaptor':
         specifier: workspace:*
         version: link:../core
       typescript:
@@ -56,10 +56,10 @@ importers:
 
   playground:
     dependencies:
-      layout-adaptor:
+      '@tinyforged/layout-adaptor':
         specifier: workspace:*
         version: link:../packages/core
-      layout-adaptor-vue:
+      '@tinyforged/layout-adaptor-vue':
         specifier: workspace:*
         version: link:../packages/vue
       vue:

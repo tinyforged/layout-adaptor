@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useLayoutAdaptorInject } from "layout-adaptor-vue";
+import { useLayoutAdaptorInject } from "@tinyforged/layout-adaptor-vue";
 
 defineProps<{
   lastScale: number | null;

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LayoutAdaptor, type AdaptMode } from "layout-adaptor";
+import { LayoutAdaptor, type AdaptMode } from "@tinyforged/layout-adaptor";
 import { onMounted, onUnmounted, ref } from "vue";
 
 const scale = ref(1);

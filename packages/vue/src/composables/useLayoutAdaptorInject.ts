@@ -6,7 +6,7 @@ import {
   type AdaptMode,
   type Direction,
   type BreakpointConfig,
-} from "layout-adaptor";
+} from "@tinyforged/layout-adaptor";
 import {
   LAYOUT_ADAPTOR_KEY,
   type LayoutAdaptorInjectValue,

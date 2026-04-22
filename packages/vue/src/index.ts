@@ -30,4 +30,4 @@ export {
   type LayoutAdaptorEventType,
   type LayoutAdaptorEventListener,
   type AdaptStrategy,
-} from "layout-adaptor";
+} from "@tinyforged/layout-adaptor";

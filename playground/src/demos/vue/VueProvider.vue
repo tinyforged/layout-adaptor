@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LayoutAdaptorProvider } from "layout-adaptor-vue";
+import { LayoutAdaptorProvider } from "@tinyforged/layout-adaptor-vue";
 import { ref } from "vue";
 import InnerContent from "./VueProviderInner.vue";
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LayoutAdaptor, type FitMode } from "layout-adaptor";
+import { LayoutAdaptor, type FitMode } from "@tinyforged/layout-adaptor";
 import { onMounted, onUnmounted, ref } from "vue";
 
 const modes: FitMode[] = ["contain", "cover", "fill", "width", "height", "crop"];

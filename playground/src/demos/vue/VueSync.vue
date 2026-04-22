@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useLayoutAdaptor } from "layout-adaptor-vue";
+import { useLayoutAdaptor } from "@tinyforged/layout-adaptor-vue";
 import { ref, computed } from "vue";
 
 const currentW = ref(1920);
