@@ -8,8 +8,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "layout-adaptor": "workspace:*",
-    "layout-adaptor-vue": "workspace:*",
+    "@tinyforged/layout-adaptor": "workspace:*",
+    "@tinyforged/layout-adaptor-vue": "workspace:*",
     "vue": "^3.5.0"
   },
   "devDependencies": {

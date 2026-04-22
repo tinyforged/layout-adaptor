@@ -1,5 +1,5 @@
 {
-  "name": "layout-adaptor",
+  "name": "@tinyforged/layout-adaptor",
   "version": "1.0.0",
   "description": "Framework-agnostic responsive layout adaptor for scaling containers to fit design dimensions",
   "author": {

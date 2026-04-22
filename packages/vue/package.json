@@ -1,5 +1,5 @@
 {
-  "name": "layout-adaptor-vue",
+  "name": "@tinyforged/layout-adaptor-vue",
   "version": "1.0.0",
   "description": "Vue 3 integration for layout-adaptor — composable hooks and components",
   "author": {
@@ -38,10 +38,10 @@
   },
   "peerDependencies": {
     "vue": "^3.3.0",
-    "layout-adaptor": "workspace:*"
+    "@tinyforged/layout-adaptor": "workspace:*"
   },
   "devDependencies": {
-    "layout-adaptor": "workspace:*",
+    "@tinyforged/layout-adaptor": "workspace:*",
     "typescript": "^5.3.3",
     "unbuild": "^2.0.0",
     "vue": "^3.5.0"
