@@ -40,10 +40,11 @@ importers:
         version: 2.0.0(typescript@5.9.3)
 
   packages/vue:
-    devDependencies:
+    dependencies:
       '@tinyforged/layout-adaptor':
         specifier: workspace:*
         version: link:../core
+    devDependencies:
       typescript:
         specifier: ^5.3.3
         version: 5.9.3
