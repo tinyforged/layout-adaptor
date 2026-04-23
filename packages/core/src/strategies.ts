@@ -173,8 +173,8 @@ export class VwvhStrategy implements AdaptStrategy {
     _rootFontSize: number
   ): void {
     const inverse = (1 / scale) * level;
-    el.style.width = `${origW * inverse}px`;
-    el.style.height = `${origH * inverse}px`;
+    el.style.width = `${origW * level}px`;
+    el.style.height = `${origH * level}px`;
     el.style.transform = `scale(${inverse})`;
     el.style.transformOrigin = '0 0';
   }
