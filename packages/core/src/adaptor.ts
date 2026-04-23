@@ -142,6 +142,7 @@ export class LayoutAdaptor {
   private _strategy: AdaptStrategy;
   private _activeBreakpoint: BreakpointConfig | null = null;
   private _debugOverlay: DebugOverlay | null = null;
+  private _onScaleChange: ((scale: number) => void) | null = null;
   private _userDesignWidth: number;
   private _userDesignHeight: number;
   private _userFitMode: FitMode;
@@ -168,6 +169,7 @@ export class LayoutAdaptor {
     this._strategy = createStrategy(this._config.adaptMode);
 
     if (options.onScaleChange) {
+      this._onScaleChange = options.onScaleChange;
       this.on("scaleChange", options.onScaleChange);
     }
   }
@@ -301,6 +303,7 @@ export class LayoutAdaptor {
   disable(): this {
     this._config.disabled = true;
     if (this._started && this._targetEl) {
+      this._unobserveResize();
       this._strategy.cleanup(this._targetEl);
       if (this._config.className) {
         this._targetEl.classList.remove(this._config.className);
@@ -424,6 +427,8 @@ export class LayoutAdaptor {
       this._config.className = options.className;
 
     if (options.onScaleChange) {
+      if (this._onScaleChange) this.off("scaleChange", this._onScaleChange);
+      this._onScaleChange = options.onScaleChange;
       this.on("scaleChange", options.onScaleChange);
     }
 
@@ -518,7 +523,7 @@ export class LayoutAdaptor {
   }
 
   private _render(): void {
-    if (!this._targetEl) return;
+    if (!this._targetEl || !this._started || this._config.disabled) return;
 
     const viewportW = document.documentElement.clientWidth;
     const viewportH = document.documentElement.clientHeight;
