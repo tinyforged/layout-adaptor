@@ -1,4 +1,4 @@
-import { onMounted, onUnmounted, ref, type Ref } from "vue";
+import { onMounted, onUnmounted, ref, type Ref, unref } from "vue";
 import {
   LayoutAdaptor,
   type LayoutAdaptorOptions,
@@ -8,6 +8,11 @@ import {
   type Direction,
   type BreakpointConfig,
 } from "@tinyforged/layout-adaptor";
+
+export interface UseLayoutAdaptorOptions
+  extends Omit<LayoutAdaptorOptions, "target"> {
+  target?: string | Ref<HTMLElement | undefined> | HTMLElement;
+}
 
 export interface UseLayoutAdaptorReturn {
   scale: Ref<number>;
@@ -32,8 +37,15 @@ export interface UseLayoutAdaptorReturn {
   ) => void;
 }
 
+function resolveVueTarget(
+  target: string | Ref<HTMLElement | undefined> | HTMLElement | undefined,
+): string | HTMLElement | undefined {
+  if (!target) return undefined;
+  return unref(target) ?? undefined;
+}
+
 export function useLayoutAdaptor(
-  options: LayoutAdaptorOptions | Ref<LayoutAdaptorOptions>,
+  options: UseLayoutAdaptorOptions | Ref<UseLayoutAdaptorOptions>,
 ): UseLayoutAdaptorReturn {
   const adaptor = ref(new LayoutAdaptor()) as Ref<LayoutAdaptor>;
   const scale = ref(1);
@@ -43,10 +55,10 @@ export function useLayoutAdaptor(
   const activeBreakpoint = ref<BreakpointConfig | null>(null);
   const isDisabled = ref(false);
 
-  const resolveOptions = (): LayoutAdaptorOptions =>
+  const resolveOptions = (): UseLayoutAdaptorOptions =>
     options && typeof options === "object" && "value" in options
       ? options.value
-      : (options as LayoutAdaptorOptions);
+      : (options as UseLayoutAdaptorOptions);
 
   const syncState = () => {
     scale.value = adaptor.value.scale;
@@ -57,7 +69,8 @@ export function useLayoutAdaptor(
   };
 
   const update = (patch: Partial<LayoutAdaptorOptions>) => {
-    adaptor.value.update({ ...resolveOptions(), ...patch });
+    const resolved = resolveOptions();
+    adaptor.value.update({ ...resolved, target: resolveVueTarget(resolved.target), ...patch });
     syncState();
   };
 
@@ -100,6 +113,7 @@ export function useLayoutAdaptor(
     const resolved = resolveOptions();
     const instance = new LayoutAdaptor({
       ...resolved,
+      target: resolveVueTarget(resolved.target),
       onScaleChange: (s) => {
         scale.value = s;
       },

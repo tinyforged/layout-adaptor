@@ -6,6 +6,7 @@ import {
   ref,
   watch,
   type PropType,
+  type Ref,
 } from "vue";
 import {
   LayoutAdaptor,
@@ -26,12 +27,12 @@ import {
 export const LAYOUT_ADAPTOR_KEY = Symbol("layout-adaptor");
 
 export interface LayoutAdaptorInjectValue {
-  adaptor: ref<LayoutAdaptor | null>;
-  scale: ref<number>;
-  adaptMode: ref<AdaptMode>;
-  direction: ref<Direction>;
-  activeBreakpoint: ref<BreakpointConfig | null>;
-  disabled: ref<boolean>;
+  adaptor: Ref<LayoutAdaptor | null>;
+  scale: Ref<number>;
+  adaptMode: Ref<AdaptMode>;
+  direction: Ref<Direction>;
+  activeBreakpoint: Ref<BreakpointConfig | null>;
+  disabled: Ref<boolean>;
   setAdaptMode: (mode: AdaptMode) => void;
   setDirection: (dir: Direction) => void;
   enable: () => void;
