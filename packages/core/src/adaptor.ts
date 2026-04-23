@@ -303,6 +303,7 @@ export class LayoutAdaptor {
     this._config.disabled = true;
     if (this._started && this._targetEl) {
       this._unobserveResize();
+      this._removeIgnoreStyle();
       this._strategy.cleanup(this._targetEl);
       if (this._config.className) {
         this._targetEl.classList.remove(this._config.className);
