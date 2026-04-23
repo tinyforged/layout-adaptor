@@ -29,6 +29,7 @@
     "ncu": "bt ncu",
     "publish-pkg": "pnpm -r publish --access public",
     "typecheck": "pnpm -r run typecheck",
+    "prepare": "simple-git-hooks",
     "release": "bt release && pnpm build && pnpm publish-pkg"
   },
   "devDependencies": {
