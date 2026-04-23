@@ -29,6 +29,8 @@ jobs:
 
       - run: pnpm --filter @tinyforged/layout-adaptor --filter @tinyforged/layout-adaptor-vue run build
 
+      - run: pnpm --filter @tinyforged/layout-adaptor --filter @tinyforged/layout-adaptor-vue exec tsc --noEmit
+
       - run: pnpm --filter @tinyforged/layout-adaptor publish --no-git-checks --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
