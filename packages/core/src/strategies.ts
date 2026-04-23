@@ -72,6 +72,8 @@ export class RemStrategy implements AdaptStrategy {
 
   private _origElFontSize: string = '';
 
+  private _inverseFontSizes = new Map<HTMLElement, string>();
+
   apply(el: HTMLElement, info: StrategyApplyInfo): void {
     const { scale, designW, direction, overflow, transition, rootFontSize } = info;
 
@@ -116,8 +118,13 @@ export class RemStrategy implements AdaptStrategy {
     _dpr: number,
     rootFontSize: number
   ): void {
+    if (!this._inverseFontSizes.has(el)) {
+      this._inverseFontSizes.set(el, el.style.fontSize);
+    }
     const inverse = (1 / scale) * level;
-    el.style.fontSize = `${inverse * rootFontSize}px`;
+    const origFontSize = this._inverseFontSizes.get(el) || `${rootFontSize}px`;
+    const parsed = parseFloat(origFontSize);
+    el.style.fontSize = `${inverse * parsed}px`;
   }
 }
 
