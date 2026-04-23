@@ -42,7 +42,7 @@ const adaptor = new LayoutAdaptor({
 | --------- | -------------------------------- |
 | `contain` | 等比缩放，完整显示（默认）       |
 | `cover`   | 等比缩放，填满容器，超出部分裁剪 |
-| `fill`    | 拉伸填满容器                     |
+| `fill`    | 按最大比例缩放填满容器           |
 | `width`   | 按宽度缩放                       |
 | `height`  | 按高度缩放                       |
 | `crop`    | 按最大比例缩放并裁剪             |
@@ -178,6 +178,7 @@ const adaptor = new LayoutAdaptor({
 | `once(event, listener)`          | `this` | 监听一次           |
 | `inverseScale(selector, level?)` | `this` | 反向缩放子元素     |
 | `resetInverse(selector)`         | `this` | 移除反向缩放       |
+| `destroy()`                      | `this` | 停止并释放所有监听 |
 
 ## Events
 

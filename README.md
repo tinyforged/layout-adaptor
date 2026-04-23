@@ -166,7 +166,7 @@ const { scale, setAdaptMode, disable } = useLayoutAdaptorInject();
 | --------- | -------------------------------- |
 | `contain` | 等比缩放，完整显示内容           |
 | `cover`   | 等比缩放，填满容器，超出部分裁剪 |
-| `fill`    | 拉伸填满容器                     |
+| `fill`    | 按最大比例缩放填满容器           |
 | `width`   | 按宽度缩放                       |
 | `height`  | 按高度缩放                       |
 | `crop`    | 按最大比例缩放并裁剪             |
@@ -196,8 +196,7 @@ const { scale, setAdaptMode, disable } = useLayoutAdaptorInject();
 | `once(event, listener)`          | 监听一次               |
 | `inverseScale(selector, level?)` | 对子元素应用反向缩放   |
 | `resetInverse(selector)`         | 移除反向缩放           |
-
-### Events
+| `destroy()`                      | 停止并释放所有事件监听 |
 
 | 事件               | 回调签名                            | 说明         |
 | ------------------ | ----------------------------------- | ------------ |
