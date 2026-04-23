@@ -78,6 +78,8 @@ function computeScale(
       const scaleY = viewportH / designH;
       return Math.max(scaleX, scaleY);
     }
+    default:
+      return ratioX;
   }
 }
 

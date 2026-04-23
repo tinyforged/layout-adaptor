@@ -67,6 +67,8 @@ export class ScaleStrategy implements AdaptStrategy {
     origW: number,
     origH: number,
     level: number,
+    _dpr: number,
+    _rootFontSize: number,
   ): void {
     const inverse = (1 / scale) * level;
     el.style.width = `${origW * inverse}px`;
@@ -125,12 +127,14 @@ export class RemStrategy implements AdaptStrategy {
   inverseScale(
     el: HTMLElement,
     scale: number,
-    origW: number,
-    origH: number,
+    _origW: number,
+    _origH: number,
     level: number,
+    _dpr: number,
+    rootFontSize: number,
   ): void {
     const inverse = (1 / scale) * level;
-    el.style.fontSize = `${inverse * 16}px`;
+    el.style.fontSize = `${inverse * rootFontSize}px`;
   }
 }
 
@@ -153,14 +157,14 @@ export class VwvhStrategy implements AdaptStrategy {
       el.style.width = "100vw";
       el.style.maxWidth = "100vw";
     } else {
-      el.style.width = `${designW * (viewportW / designW)}px`;
+      el.style.width = `${viewportW}px`;
     }
 
     if (direction === "vertical" || direction === "both") {
       el.style.height = "100vh";
       el.style.maxHeight = "100vh";
     } else {
-      el.style.height = `${designH * (viewportH / designH)}px`;
+      el.style.height = `${viewportH}px`;
     }
 
     el.style.overflow = overflow;
@@ -190,6 +194,8 @@ export class VwvhStrategy implements AdaptStrategy {
     origW: number,
     origH: number,
     level: number,
+    _dpr: number,
+    _rootFontSize: number,
   ): void {
     const inverse = (1 / scale) * level;
     el.style.width = `${origW * inverse}px`;
@@ -247,6 +253,8 @@ export class ZoomStrategy implements AdaptStrategy {
     origW: number,
     origH: number,
     level: number,
+    _dpr: number,
+    _rootFontSize: number,
   ): void {
     const inverse = (1 / scale) * level;
     el.style.zoom = `${inverse}`;
