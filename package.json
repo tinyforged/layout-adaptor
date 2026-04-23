@@ -37,6 +37,7 @@
     "bitsy-cli": "^0.0.4",
     "eslint": "^8.55.0",
     "eslint-config-bitsy": "^0.0.9",
+    "eslint-plugin-n": "^17.24.0",
     "simple-git-hooks": "^2.9.0",
     "typescript": "^5.3.3",
     "unbuild": "^2.0.0"
