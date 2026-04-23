@@ -374,6 +374,12 @@ export class LayoutAdaptor {
     return this;
   }
 
+  destroy(): this {
+    this.stop();
+    this._listeners = {};
+    return this;
+  }
+
   update(options: LayoutAdaptorOptions): this {
     const wasStarted = this._started;
     this.stop();
