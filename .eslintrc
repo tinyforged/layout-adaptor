@@ -3,6 +3,8 @@
   "rules": {
     "class-methods-use-this": "off",
     "no-underscore-dangle": "off",
-    "max-params": "off"
+    "max-params": "off",
+    "no-plusplus": "off",
+    "complexity": "off"
   }
 }
