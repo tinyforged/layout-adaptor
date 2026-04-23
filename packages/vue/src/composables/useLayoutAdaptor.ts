@@ -1,4 +1,4 @@
-import { onMounted, onUnmounted, ref, type Ref, unref } from "vue";
+import { onMounted, onUnmounted, ref, shallowRef, type Ref, unref } from "vue";
 import {
   LayoutAdaptor,
   type LayoutAdaptorOptions,
@@ -17,7 +17,7 @@ export interface UseLayoutAdaptorOptions
 export interface UseLayoutAdaptorReturn {
   scale: Ref<number>;
   started: Ref<boolean>;
-  adaptor: Ref<LayoutAdaptor>;
+  adaptor: Ref<LayoutAdaptor | null>;
   adaptMode: Ref<AdaptMode>;
   direction: Ref<Direction>;
   activeBreakpoint: Ref<BreakpointConfig | null>;
@@ -47,7 +47,7 @@ function resolveVueTarget(
 export function useLayoutAdaptor(
   options: UseLayoutAdaptorOptions | Ref<UseLayoutAdaptorOptions>,
 ): UseLayoutAdaptorReturn {
-  const adaptor = ref(new LayoutAdaptor()) as Ref<LayoutAdaptor>;
+  const adaptor = shallowRef<LayoutAdaptor | null>(null);
   const scale = ref(1);
   const started = ref(false);
   const adaptMode = ref<AdaptMode>("scale");
@@ -61,52 +61,54 @@ export function useLayoutAdaptor(
       : (options as UseLayoutAdaptorOptions);
 
   const syncState = () => {
+    if (!adaptor.value) return;
     scale.value = adaptor.value.scale;
     started.value = adaptor.value.started;
     adaptMode.value = adaptor.value.adaptMode;
     direction.value = adaptor.value.direction;
     activeBreakpoint.value = adaptor.value.activeBreakpoint;
+    isDisabled.value = adaptor.value.disabled;
   };
 
   const update = (patch: Partial<LayoutAdaptorOptions>) => {
+    if (!adaptor.value) return;
     const resolved = resolveOptions();
     adaptor.value.update({ ...resolved, target: resolveVueTarget(resolved.target), ...patch });
     syncState();
   };
 
   const setAdaptMode = (mode: AdaptMode) => {
-    adaptor.value.setAdaptMode(mode);
-    adaptMode.value = mode;
+    adaptor.value?.setAdaptMode(mode);
+    syncState();
   };
 
   const setDirection = (dir: Direction) => {
-    adaptor.value.setDirection(dir);
-    direction.value = dir;
+    adaptor.value?.setDirection(dir);
+    syncState();
   };
 
   const enable = () => {
-    adaptor.value.enable();
-    isDisabled.value = false;
+    adaptor.value?.enable();
     syncState();
   };
 
   const disable = () => {
-    adaptor.value.disable();
-    isDisabled.value = true;
+    adaptor.value?.disable();
+    syncState();
   };
 
   const on = <T extends LayoutAdaptorEventType>(
     event: T,
     listener: LayoutAdaptorEventListener<T>,
   ) => {
-    adaptor.value.on(event, listener);
+    adaptor.value?.on(event, listener);
   };
 
   const off = <T extends LayoutAdaptorEventType>(
     event: T,
     listener: LayoutAdaptorEventListener<T>,
   ) => {
-    adaptor.value.off(event, listener);
+    adaptor.value?.off(event, listener);
   };
 
   onMounted(() => {
@@ -123,13 +125,22 @@ export function useLayoutAdaptor(
       activeBreakpoint.value = bp;
     });
 
+    instance.on("adaptModeChange", (mode) => {
+      adaptMode.value = mode;
+    });
+
+    instance.on("directionChange", (dir) => {
+      direction.value = dir;
+    });
+
     instance.start();
     adaptor.value = instance;
     syncState();
   });
 
   onUnmounted(() => {
-    adaptor.value.stop();
+    adaptor.value?.stop();
+    adaptor.value = null;
     started.value = false;
   });
 
