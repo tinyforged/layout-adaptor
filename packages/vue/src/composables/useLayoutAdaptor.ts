@@ -1,4 +1,4 @@
-import { onMounted, onUnmounted, ref, shallowRef, type Ref, unref } from "vue";
+import { nextTick, onMounted, onUnmounted, ref, shallowRef, type Ref, unref } from 'vue';
 import {
   LayoutAdaptor,
   type LayoutAdaptorOptions,
@@ -6,11 +6,10 @@ import {
   type LayoutAdaptorEventListener,
   type AdaptMode,
   type Direction,
-  type BreakpointConfig,
-} from "@tinyforged/layout-adaptor";
+  type BreakpointConfig
+} from '@tinyforged/layout-adaptor';
 
-export interface UseLayoutAdaptorOptions
-  extends Omit<LayoutAdaptorOptions, "target"> {
+export interface UseLayoutAdaptorOptions extends Omit<LayoutAdaptorOptions, 'target'> {
   target?: string | Ref<HTMLElement | undefined> | HTMLElement;
 }
 
@@ -27,38 +26,30 @@ export interface UseLayoutAdaptorReturn {
   setDirection: (dir: Direction) => void;
   enable: () => void;
   disable: () => void;
-  on: <T extends LayoutAdaptorEventType>(
-    event: T,
-    listener: LayoutAdaptorEventListener<T>,
-  ) => void;
-  off: <T extends LayoutAdaptorEventType>(
-    event: T,
-    listener: LayoutAdaptorEventListener<T>,
-  ) => void;
+  on: <T extends LayoutAdaptorEventType>(event: T, listener: LayoutAdaptorEventListener<T>) => void;
+  off: <T extends LayoutAdaptorEventType>(event: T, listener: LayoutAdaptorEventListener<T>) => void;
 }
 
 function resolveVueTarget(
-  target: string | Ref<HTMLElement | undefined> | HTMLElement | undefined,
+  target: string | Ref<HTMLElement | undefined> | HTMLElement | undefined
 ): string | HTMLElement | undefined {
   if (!target) return undefined;
   return unref(target) ?? undefined;
 }
 
 export function useLayoutAdaptor(
-  options: UseLayoutAdaptorOptions | Ref<UseLayoutAdaptorOptions>,
+  options: UseLayoutAdaptorOptions | Ref<UseLayoutAdaptorOptions>
 ): UseLayoutAdaptorReturn {
   const adaptor = shallowRef<LayoutAdaptor | null>(null);
   const scale = ref(1);
   const started = ref(false);
-  const adaptMode = ref<AdaptMode>("scale");
-  const direction = ref<Direction>("both");
+  const adaptMode = ref<AdaptMode>('scale');
+  const direction = ref<Direction>('both');
   const activeBreakpoint = ref<BreakpointConfig | null>(null);
   const isDisabled = ref(false);
 
   const resolveOptions = (): UseLayoutAdaptorOptions =>
-    options && typeof options === "object" && "value" in options
-      ? options.value
-      : (options as UseLayoutAdaptorOptions);
+    options && typeof options === 'object' && 'value' in options ? options.value : (options as UseLayoutAdaptorOptions);
 
   const syncState = () => {
     if (!adaptor.value) return;
@@ -97,45 +88,45 @@ export function useLayoutAdaptor(
     syncState();
   };
 
-  const on = <T extends LayoutAdaptorEventType>(
-    event: T,
-    listener: LayoutAdaptorEventListener<T>,
-  ) => {
+  const on = <T extends LayoutAdaptorEventType>(event: T, listener: LayoutAdaptorEventListener<T>) => {
     adaptor.value?.on(event, listener);
   };
 
-  const off = <T extends LayoutAdaptorEventType>(
-    event: T,
-    listener: LayoutAdaptorEventListener<T>,
-  ) => {
+  const off = <T extends LayoutAdaptorEventType>(event: T, listener: LayoutAdaptorEventListener<T>) => {
     adaptor.value?.off(event, listener);
   };
 
-  onMounted(() => {
+  onMounted(async () => {
     const resolved = resolveOptions();
     const instance = new LayoutAdaptor({
       ...resolved,
       target: resolveVueTarget(resolved.target),
-      onScaleChange: (s) => {
+      onScaleChange: s => {
         scale.value = s;
-      },
+      }
     });
 
-    instance.on("breakpointChange", (bp) => {
+    instance.on('breakpointChange', bp => {
       activeBreakpoint.value = bp;
     });
 
-    instance.on("adaptModeChange", (mode) => {
+    instance.on('adaptModeChange', mode => {
       adaptMode.value = mode;
     });
 
-    instance.on("directionChange", (dir) => {
+    instance.on('directionChange', dir => {
       direction.value = dir;
     });
 
     instance.start();
     adaptor.value = instance;
     syncState();
+
+    if (!instance.started) {
+      await nextTick();
+      instance.start();
+      syncState();
+    }
   });
 
   onUnmounted(() => {
@@ -158,6 +149,6 @@ export function useLayoutAdaptor(
     enable,
     disable,
     on,
-    off,
+    off
   };
 }
