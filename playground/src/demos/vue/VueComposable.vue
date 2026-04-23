@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useLayoutAdaptor } from "@tinyforged/layout-adaptor-vue";
-import { ref } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 
-const { scale, running } = useLayoutAdaptor({
+const { scale, started } = useLayoutAdaptor({
   target: "#demo-area",
   designWidth: 1920,
   designHeight: 1080,
@@ -11,10 +11,14 @@ const { scale, running } = useLayoutAdaptor({
 
 const vpWidth = ref(window.innerWidth);
 const vpHeight = ref(window.innerHeight);
-window.addEventListener("resize", () => {
+
+const onResize = () => {
   vpWidth.value = window.innerWidth;
   vpHeight.value = window.innerHeight;
-});
+};
+
+onMounted(() => window.addEventListener("resize", onResize));
+onUnmounted(() => window.removeEventListener("resize", onResize));
 </script>
 
 <template>
@@ -24,7 +28,7 @@ window.addEventListener("resize", () => {
       <p>Vue 3 Composable Hook 自动管理生命周期</p>
       <div class="stats">
         <div class="stat"><span class="stat-key">scale</span><span class="stat-val">{{ scale.toFixed(4) }}</span></div>
-        <div class="stat"><span class="stat-key">running</span><span class="stat-val">{{ running }}</span></div>
+        <div class="stat"><span class="stat-key">started</span><span class="stat-val">{{ started }}</span></div>
         <div class="stat"><span class="stat-key">viewport</span><span class="stat-val">{{ vpWidth }}×{{ vpHeight }}</span></div>
       </div>
       <div class="tip">拖动浏览器窗口，观察响应式缩放效果</div>
