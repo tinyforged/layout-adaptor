@@ -138,7 +138,7 @@ export class LayoutAdaptor {
 
   private _inverseTargets: InverseTarget[] = [];
 
-  private _cachedSizes = new Map<Element, { width: number; height: number }>();
+  private _cachedSizes = new WeakMap<Element, { width: number; height: number }>();
 
   private _ignoreStyleEl: HTMLStyleElement | null = null;
 
@@ -311,7 +311,7 @@ export class LayoutAdaptor {
       this._targetEl = null;
       this._clearInverse();
       this._inverseTargets = [];
-      this._cachedSizes.clear();
+      this._cachedSizes = new WeakMap();
       this._started = false;
       this._emit('stop');
     }
@@ -368,7 +368,7 @@ export class LayoutAdaptor {
 
     this._clearInverse();
     this._inverseTargets = [];
-    this._cachedSizes.clear();
+    this._cachedSizes = new WeakMap();
     this._started = false;
     this._emit('stop');
     return this;
@@ -666,17 +666,18 @@ export class LayoutAdaptor {
   }
 
   private _clearInverse(): void {
-    this._cachedSizes.forEach((_orig, el) => {
-      if (el instanceof HTMLElement) {
+    for (const { selector } of this._inverseTargets) {
+      const elements = document.querySelectorAll<HTMLElement>(selector);
+      elements.forEach(el => {
         el.style.width = '';
         el.style.height = '';
         el.style.transform = '';
         el.style.transformOrigin = '';
         el.style.zoom = '';
         el.style.fontSize = '';
-      }
-    });
-    this._cachedSizes.clear();
+      });
+    }
+    this._cachedSizes = new WeakMap();
   }
 
   private _initDebug(): void {
