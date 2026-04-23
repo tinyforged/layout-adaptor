@@ -22,6 +22,7 @@ import {
   type DebugOverlayOptions,
   type LayoutAdaptorEventType,
   type LayoutAdaptorEventListener,
+  type LayoutAdaptorState,
 } from "@tinyforged/layout-adaptor";
 
 export const LAYOUT_ADAPTOR_KEY = Symbol("layout-adaptor");
@@ -142,7 +143,7 @@ export const LayoutAdaptorProvider = defineComponent({
   emits: {
     scaleChange: (_scale: number) => true,
     resize: (_entry: { viewportW: number; viewportH: number }) => true,
-    render: (_state: any) => true,
+    render: (_state: LayoutAdaptorState) => true,
     start: () => true,
     stop: () => true,
     ready: () => true,
@@ -150,7 +151,7 @@ export const LayoutAdaptorProvider = defineComponent({
     adaptModeChange: (_mode: AdaptMode) => true,
     breakpointChange: (_bp: BreakpointConfig | null) => true,
     directionChange: (_dir: Direction) => true,
-    beforeRender: (_state: any) => true,
+    beforeRender: (_state: LayoutAdaptorState) => true,
   },
   setup(props, { slots, emit }) {
     const adaptor = ref<LayoutAdaptor | null>(null);
