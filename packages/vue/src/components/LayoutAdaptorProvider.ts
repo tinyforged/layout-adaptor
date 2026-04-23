@@ -294,6 +294,13 @@ export const LayoutAdaptorProvider = defineComponent({
     );
 
     watch(
+      () => [props.designWidth, props.designHeight, props.fitMode, props.alignX, props.alignY, props.resize, props.transition, props.resizeDelay, props.overflow, props.minScale, props.maxScale, props.customFit, props.keepDPR, props.rootFontSize, props.breakpoints, props.className],
+      () => {
+        adaptor.value?.update(buildOptions());
+      },
+    );
+
+    watch(
       () => props.debug,
       (val) => {
         adaptor.value?.update({ debug: val });
