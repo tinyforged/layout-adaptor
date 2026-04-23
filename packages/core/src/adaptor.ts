@@ -539,8 +539,24 @@ export class LayoutAdaptor {
     this._translateX = x;
     this._translateY = y;
 
-    const pendingState = this.state;
-    this._emit('beforeRender', pendingState);
+    const renderState: LayoutAdaptorState = {
+      scale: this._currentScale,
+      started: this._started,
+      designWidth: designW,
+      designHeight: designH,
+      fitMode: this._config.fitMode,
+      viewportWidth: viewportW,
+      viewportHeight: viewportH,
+      translateX: x,
+      translateY: y,
+      adaptMode: this._config.adaptMode,
+      direction: this._config.direction,
+      dpr: this.dpr,
+      activeBreakpoint: this._activeBreakpoint,
+      rootFontSize: this._config.rootFontSize
+    };
+
+    this._emit('beforeRender', renderState);
 
     this._strategy.apply(this._targetEl, {
       scale: this._currentScale,
@@ -564,10 +580,10 @@ export class LayoutAdaptor {
     }
 
     this._emit('scaleChange', this._currentScale);
-    this._emit('render', this.state);
+    this._emit('render', renderState);
 
     if (this._debugOverlay) {
-      this._debugOverlay.update(this.state);
+      this._debugOverlay.update(renderState);
     }
   }
 
