@@ -2,14 +2,29 @@
   "name": "@tinyforged/layout-adaptor-vue",
   "version": "1.1.0",
   "description": "Vue 3 integration for layout-adaptor — composable hooks and components",
+  "keywords": [
+    "vue",
+    "vue3",
+    "layout",
+    "adaptor",
+    "scale",
+    "responsive",
+    "composable",
+    "data-visualization",
+    "dashboard",
+    "large-screen",
+    "auto-scaling"
+  ],
   "author": {
     "name": "SK-ERIC",
     "email": "graceful.sk0@gmail.com",
     "url": "https://github.com/SK-ERIC"
   },
   "license": "MIT",
-  "homepage": "https://github.com/tinyforged/layout-adaptor",
+  "type": "module",
+  "homepage": "https://github.com/tinyforged/layout-adaptor#readme",
   "repository": {
+    "type": "git",
     "url": "https://github.com/tinyforged/layout-adaptor.git"
   },
   "bugs": {
@@ -25,6 +40,10 @@
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "sideEffects": false,
+  "engines": {
+    "node": ">=16"
+  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
