@@ -142,6 +142,9 @@ export class LayoutAdaptor {
   private _strategy: AdaptStrategy;
   private _activeBreakpoint: BreakpointConfig | null = null;
   private _debugOverlay: DebugOverlay | null = null;
+  private _userDesignWidth: number;
+  private _userDesignHeight: number;
+  private _userFitMode: FitMode;
 
   constructor(options: LayoutAdaptorOptions = {}) {
     this._id = `la-${++instanceCounter}`;
@@ -157,6 +160,10 @@ export class LayoutAdaptor {
       this._config.maxScale = options.maxScale;
     if (options.rootFontSize !== undefined)
       this._config.rootFontSize = options.rootFontSize;
+
+    this._userDesignWidth = this._config.designWidth;
+    this._userDesignHeight = this._config.designHeight;
+    this._userFitMode = this._config.fitMode;
 
     this._strategy = createStrategy(this._config.adaptMode);
 
@@ -371,11 +378,18 @@ export class LayoutAdaptor {
     this.stop();
 
     if (options.target !== undefined) this._config.target = options.target;
-    if (options.designWidth !== undefined)
+    if (options.designWidth !== undefined) {
       this._config.designWidth = options.designWidth;
-    if (options.designHeight !== undefined)
+      this._userDesignWidth = options.designWidth;
+    }
+    if (options.designHeight !== undefined) {
       this._config.designHeight = options.designHeight;
-    if (options.fitMode !== undefined) this._config.fitMode = options.fitMode;
+      this._userDesignHeight = options.designHeight;
+    }
+    if (options.fitMode !== undefined) {
+      this._config.fitMode = options.fitMode;
+      this._userFitMode = options.fitMode;
+    }
     if (options.alignX !== undefined) this._config.alignX = options.alignX;
     if (options.alignY !== undefined) this._config.alignY = options.alignY;
     if (options.resize !== undefined) this._config.resize = options.resize;
@@ -513,11 +527,15 @@ export class LayoutAdaptor {
     const prevBp = this._activeBreakpoint;
     this._activeBreakpoint = bp;
 
-    if (bp && bp.designWidth !== undefined)
-      this._config.designWidth = bp.designWidth;
-    if (bp && bp.designHeight !== undefined)
-      this._config.designHeight = bp.designHeight;
-    if (bp && bp.fitMode !== undefined) this._config.fitMode = bp.fitMode;
+    if (bp) {
+      this._config.designWidth = bp.designWidth ?? this._userDesignWidth;
+      this._config.designHeight = bp.designHeight ?? this._userDesignHeight;
+      this._config.fitMode = bp.fitMode ?? this._userFitMode;
+    } else {
+      this._config.designWidth = this._userDesignWidth;
+      this._config.designHeight = this._userDesignHeight;
+      this._config.fitMode = this._userFitMode;
+    }
 
     if (bp !== prevBp) {
       this._emit("breakpointChange", bp);
