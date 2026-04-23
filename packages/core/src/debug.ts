@@ -1,10 +1,10 @@
 import type { DebugOverlayOptions, LayoutAdaptorState } from "./type";
 
-const POS_MAP: Record<string, [string, string]> = {
-  "top-left": ["8px", "auto"],
-  "top-right": ["auto", "8px"],
-  "bottom-left": ["8px", "8px"],
-  "bottom-right": ["auto", "8px"],
+const POS_MAP: Record<string, { top: string; right: string; bottom: string; left: string }> = {
+  "top-left": { top: "8px", right: "auto", bottom: "auto", left: "8px" },
+  "top-right": { top: "8px", right: "8px", bottom: "auto", left: "auto" },
+  "bottom-left": { top: "auto", right: "auto", bottom: "8px", left: "8px" },
+  "bottom-right": { top: "auto", right: "8px", bottom: "8px", left: "auto" },
 };
 
 export class DebugOverlay {
@@ -26,17 +26,15 @@ export class DebugOverlay {
     const el = document.createElement("div");
     el.setAttribute("data-la-debug", "");
 
-    const [top, right] = POS_MAP[this._opts.position];
-    const isTop = this._opts.position.startsWith("top");
-    const isLeft = this._opts.position.endsWith("left");
+    const pos = POS_MAP[this._opts.position];
 
     Object.assign(el.style, {
       position: "fixed",
       zIndex: "99999",
-      top: isTop ? top : "auto",
-      right: isLeft ? "auto" : right,
-      bottom: isTop ? "auto" : top,
-      left: isLeft ? top : "auto",
+      top: pos.top,
+      right: pos.right,
+      bottom: pos.bottom,
+      left: pos.left,
       background: this._opts.color,
       color: "#fff",
       padding: "6px 10px",
