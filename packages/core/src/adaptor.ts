@@ -62,7 +62,7 @@ function computeScale(mode: FitMode, viewportW: number, viewportH: number, desig
     case 'cover':
       return Math.max(ratioX, ratioY);
     case 'fill':
-      return ratioX;
+      return Math.max(ratioX, ratioY);
     case 'width':
       return ratioX;
     case 'height':
