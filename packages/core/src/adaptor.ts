@@ -22,6 +22,12 @@ import { DebugOverlay } from "./debug";
 
 let instanceCounter = 0;
 
+function resolveTarget(target: string | HTMLElement | undefined): HTMLElement | null {
+  if (!target) return null;
+  if (typeof target === "string") return document.querySelector<HTMLElement>(target);
+  return target;
+}
+
 const DEFAULT_OPTIONS = {
   target: "#app",
   designWidth: 1920,
@@ -121,7 +127,7 @@ type EventListeners = {
 
 export class LayoutAdaptor {
   private _id: string;
-  private _config: typeof DEFAULT_OPTIONS & { customFit?: CustomFitFn };
+  private _config: Omit<typeof DEFAULT_OPTIONS, "target"> & { target: string | HTMLElement; customFit?: CustomFitFn };
   private _targetEl: HTMLElement | null = null;
   private _currentScale = 1;
   private _translateX = 0;
@@ -139,7 +145,11 @@ export class LayoutAdaptor {
 
   constructor(options: LayoutAdaptorOptions = {}) {
     this._id = `la-${++instanceCounter}`;
-    this._config = { ...DEFAULT_OPTIONS, ...options };
+    this._config = {
+      ...DEFAULT_OPTIONS,
+      ...options,
+      target: options.target ?? DEFAULT_OPTIONS.target,
+    };
     if (options.customFit) this._config.customFit = options.customFit;
     if (options.minScale !== undefined)
       this._config.minScale = options.minScale;
@@ -268,7 +278,7 @@ export class LayoutAdaptor {
     if (!this._config.disabled) return this;
     this._config.disabled = false;
     if (this._started) {
-      this._targetEl = document.querySelector<HTMLElement>(this._config.target);
+      this._targetEl = resolveTarget(this._config.target);
       if (this._targetEl) {
         if (this._config.className) {
           this._targetEl.classList.add(this._config.className);
@@ -307,7 +317,7 @@ export class LayoutAdaptor {
 
     if (this._config.disabled) return this;
 
-    this._targetEl = document.querySelector<HTMLElement>(this._config.target);
+    this._targetEl = resolveTarget(this._config.target);
     if (!this._targetEl) {
       const err = new Error(
         `[layout-adaptor] target "${this._config.target}" not found`,

@@ -84,7 +84,6 @@ export class RemStrategy implements AdaptStrategy {
     const {
       scale,
       designW,
-      viewportW,
       direction,
       overflow,
       transition,

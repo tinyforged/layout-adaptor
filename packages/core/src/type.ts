@@ -53,7 +53,7 @@ export interface DebugOverlayOptions {
 }
 
 export interface LayoutAdaptorOptions {
-  target?: string;
+  target?: string | HTMLElement;
   designWidth?: number;
   designHeight?: number;
   fitMode?: FitMode;
