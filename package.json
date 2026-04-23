@@ -43,5 +43,6 @@
   "simple-git-hooks": {
     "commit-msg": "pnpm bt git-commit-verify",
     "pre-commit": "pnpm bt lint-staged"
-  }
+  },
+  "packageManager": "pnpm@10.0.0"
 }
