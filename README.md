@@ -2,14 +2,25 @@
 
 响应式布局适配器，支持多种适配策略，用于将容器元素缩放到设计尺寸。
 
-**[在线演示 →](https://layout-adaptor.vercel.app/)**
+<p align="center">
+  <a href="https://github.com/tinyforged/layout-adaptor/stargazers"><img src="https://img.shields.io/github/stars/tinyforged/layout-adaptor?style=flat-square" alt="Stars"/></a>
+  <a href="https://github.com/tinyforged/layout-adaptor/network/members"><img src="https://img.shields.io/github/forks/tinyforged/layout-adaptor?style=flat-square" alt="Forks"/></a>
+  <a href="https://github.com/tinyforged/layout-adaptor/issues"><img src="https://img.shields.io/github/issues/tinyforged/layout-adaptor?style=flat-square" alt="Issues"/></a>
+  <a href="https://github.com/tinyforged/layout-adaptor/blob/main/LICENSE"><img src="https://img.shields.io/github/license/tinyforged/layout-adaptor?style=flat-square" alt="License"/></a>
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript"/>
+  <a href="https://github.com/tinyforged/layout-adaptor/commits/main"><img src="https://img.shields.io/github/last-commit/tinyforged/layout-adaptor?style=flat-square" alt="Last commit"/></a>
+</p>
+
+<p align="center">
+  <strong><a href="https://layout-adaptor.vercel.app/">在线演示 →</a></strong>
+</p>
 
 ## Packages
 
-| Package                                            | Version                                                                                                                               | Description        |
-| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| [`@tinyforged/layout-adaptor`](./packages/core)    | ![npm](https://img.shields.io/npm/v/@tinyforged/layout-adaptor?style=flat-square)                                                     | 框架无关的核心实现 |
-| [`@tinyforged/layout-adaptor-vue`](./packages/vue) | ![npm](https://img.shields.io/npm/v/@tinyforged/layout-adaptor-vue?style=flat-square&color=42b883) | Vue 3 绑定         |
+| Package | Version | Downloads | Description |
+| --- | --- | --- | --- |
+| [@tinyforged/layout-adaptor](./packages/core) | ![npm](https://img.shields.io/npm/v/@tinyforged/layout-adaptor?style=flat-square) | ![dl](https://img.shields.io/npm/dt/@tinyforged/layout-adaptor?style=flat-square) | 框架无关的核心实现 |
+| [@tinyforged/layout-adaptor-vue](./packages/vue) | ![npm](https://img.shields.io/npm/v/@tinyforged/layout-adaptor-vue?style=flat-square&color=42b883) | ![dl](https://img.shields.io/npm/dt/@tinyforged/layout-adaptor-vue?style=flat-square&color=42b883) | Vue 3 绑定 |
 
 ## Features
 
