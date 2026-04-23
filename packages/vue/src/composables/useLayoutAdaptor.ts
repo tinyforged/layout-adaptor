@@ -9,9 +9,9 @@ import {
   type BreakpointConfig
 } from '@tinyforged/layout-adaptor';
 
-export interface UseLayoutAdaptorOptions extends Omit<LayoutAdaptorOptions, 'target'> {
+export type UseLayoutAdaptorOptions = Omit<LayoutAdaptorOptions, 'target'> & {
   target?: string | Ref<HTMLElement | undefined> | HTMLElement;
-}
+};
 
 export interface UseLayoutAdaptorReturn {
   scale: Ref<number>;
